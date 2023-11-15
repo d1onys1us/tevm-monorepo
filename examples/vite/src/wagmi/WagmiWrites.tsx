@@ -3,13 +3,19 @@ import { WagmiMintExample } from '../contracts/WagmiMintExample.sol'
 import { getRandomInt } from '../utils/getRandomInt'
 import {
 	Address,
+	mainnet,
 	useAccount,
 	useContractRead,
 	useContractWrite,
+	useQuery,
 	useWaitForTransaction,
 } from 'wagmi'
+import { EVMts } from '@evmts/vm'
+
+const createVm = () => EVMts.create({ fork: import.meta.env.VITE_RPC_URL_1 ?? mainnet.rpcUrls.public.http })
 
 export const WagmiWrites = () => {
+	const { data: vm } = useQuery(['EVMts.create'], createVm)
 	const { address, isConnected } = useAccount()
 
 	const { data, refetch } = useContractRead({
@@ -38,6 +44,10 @@ export const WagmiWrites = () => {
 		},
 	})
 
+	const { data: optimisticBalance } = useQuery(['optimisticBalance', address], async () => {
+		return vm?.runContractCall(WagmiMintExample.read.balanceOf(address as Address))
+	})
+
 	return (
 		<div>
 			<div>
@@ -50,6 +60,17 @@ export const WagmiWrites = () => {
 				}
 			>
 				Mint
+			</button>
+			<div>
+				<div>Optimistic balance: {data?.toString()}</div>
+			</div>
+			<button
+				type='button'
+				onClick={() =>
+					vm?.runContractCall(WagmiMintExample.write.mint(BigInt(getRandomInt())))
+				}
+			>
+				Simulate Mint
 			</button>
 		</div>
 	)

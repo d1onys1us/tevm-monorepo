@@ -746,6 +746,9 @@ importers:
       '@tanstack/react-query':
         specifier: ^5.8.4
         version: 5.8.4(react-dom@18.2.0)(react@18.2.0)
+      '@tevm/bundler':
+        specifier: workspace:^
+        version: link:../../bundler
       '@tevm/config':
         specifier: workspace:^
         version: link:../../bundler-packages/config
@@ -755,6 +758,9 @@ importers:
       '@tevm/ethers':
         specifier: workspace:^
         version: link:../../extensions/ethers
+      '@tevm/memory-client':
+        specifier: workspace:^
+        version: link:../../packages/memory-client
       '@tevm/solc':
         specifier: workspace:^
         version: link:../../bundler-packages/solc
