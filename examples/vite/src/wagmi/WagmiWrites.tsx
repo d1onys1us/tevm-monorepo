@@ -1,6 +1,7 @@
 import { addresses } from '../addresses'
 import { WagmiMintExample } from '../contracts/WagmiMintExample.sol'
 import { getRandomInt } from '../utils/getRandomInt'
+import { EVMts } from '@evmts/vm'
 import {
 	Address,
 	mainnet,
@@ -10,9 +11,11 @@ import {
 	useQuery,
 	useWaitForTransaction,
 } from 'wagmi'
-import { EVMts } from '@evmts/vm'
 
-const createVm = () => EVMts.create({ fork: import.meta.env.VITE_RPC_URL_1 ?? mainnet.rpcUrls.public.http })
+const createVm = () =>
+	EVMts.create({
+		fork: import.meta.env.VITE_RPC_URL_1 ?? mainnet.rpcUrls.public.http,
+	})
 
 export const WagmiWrites = () => {
 	const { data: vm } = useQuery(['EVMts.create'], createVm)
@@ -44,9 +47,14 @@ export const WagmiWrites = () => {
 		},
 	})
 
-	const { data: optimisticBalance } = useQuery(['optimisticBalance', address], async () => {
-		return vm?.runContractCall(WagmiMintExample.read.balanceOf(address as Address))
-	})
+	const { data: optimisticBalance } = useQuery(
+		['optimisticBalance', address],
+		async () => {
+			return vm?.runContractCall(
+				WagmiMintExample.read.balanceOf(address as Address),
+			)
+		},
+	)
 
 	return (
 		<div>
@@ -67,7 +75,9 @@ export const WagmiWrites = () => {
 			<button
 				type='button'
 				onClick={() =>
-					vm?.runContractCall(WagmiMintExample.write.mint(BigInt(getRandomInt())))
+					vm?.runContractCall(
+						WagmiMintExample.write.mint(BigInt(getRandomInt())),
+					)
 				}
 			>
 				Simulate Mint
