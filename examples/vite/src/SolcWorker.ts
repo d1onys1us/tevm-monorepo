@@ -1,4 +1,4 @@
-import { SolcOutput } from '@evmts/solc'
+import { type SolcOutput, solcCompile, createSolc } from '@tevm/solc'
 import { z } from 'zod'
 
 console.log('running worker...')
@@ -12,19 +12,22 @@ export type MessageResult = {
 	error?: string
 }
 
+let solc: any
+
 const params = z.object({
 	code: z.string(),
 	id: z.string(),
 })
 // Solc is expensive to import expensive to compile and expensive to run
 // Run it in a web worker so it always runs on a seperate thread
-onmessage = async function (e) {
+onmessage = async function(e) {
 	const { code, id } = params.parse(e.data)
 
-	const { solcCompile } = await import('@evmts/solc')
+	solc = solc ?? (await createSolc('0.8.23'))
+
 	try {
 		const result = {
-			data: solcCompile({
+			data: solcCompile(solc, {
 				language: 'Solidity',
 				settings: {
 					outputSelection: {
