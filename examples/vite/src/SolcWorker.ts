@@ -1,4 +1,4 @@
-import { type SolcOutput, solcCompile, createSolc } from '@tevm/solc'
+import { type SolcOutput, createSolc, solcCompile } from '@tevm/solc'
 import { z } from 'zod'
 
 console.log('running worker...')
@@ -20,7 +20,7 @@ const params = z.object({
 })
 // Solc is expensive to import expensive to compile and expensive to run
 // Run it in a web worker so it always runs on a seperate thread
-onmessage = async function(e) {
+onmessage = async function (e) {
 	const { code, id } = params.parse(e.data)
 
 	solc = solc ?? (await createSolc('0.8.23'))

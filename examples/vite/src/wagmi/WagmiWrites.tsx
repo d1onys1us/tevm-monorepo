@@ -1,3 +1,6 @@
+import { addresses } from '../addresses'
+import { WagmiMintExample } from '../contracts/WagmiMintExample.sol'
+import { getRandomInt } from '../utils/getRandomInt'
 import { createMemoryClient } from '@tevm/memory-client'
 import {
 	Address,
@@ -8,13 +11,12 @@ import {
 	useQuery,
 	useWaitForTransaction,
 } from 'wagmi'
-import { addresses } from '../addresses'
-import { WagmiMintExample } from '../contracts/WagmiMintExample.sol'
-import { getRandomInt } from '../utils/getRandomInt'
 
 const createVm = () =>
 	createMemoryClient({
-		fork: {url: import.meta.env.VITE_RPC_URL_1 ?? mainnet.rpcUrls.public.http[0]},
+		fork: {
+			url: import.meta.env.VITE_RPC_URL_1 ?? mainnet.rpcUrls.public.http[0],
+		},
 	})
 
 export const WagmiWrites = () => {
@@ -52,9 +54,7 @@ export const WagmiWrites = () => {
 	const { data: optimisticBalance } = useQuery(
 		['optimisticBalance', address],
 		async () => {
-			return vm?.contract(
-				contract.read.balanceOf(address as Address),
-			)
+			return vm?.contract(contract.read.balanceOf(address as Address))
 		},
 	)
 
