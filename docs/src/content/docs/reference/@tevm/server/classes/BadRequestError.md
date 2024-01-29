@@ -205,6 +205,7 @@ Error.captureStackTrace
 
 node\_modules/.pnpm/@types+node@20.11.5/node\_modules/@types/node/globals.d.ts:21
 
+<<<<<<< HEAD
 #### captureStackTrace(targetObject, constructorOpt)
 
 > **`static`** **captureStackTrace**(`targetObject`, `constructorOpt`?): `void`
@@ -229,5 +230,7 @@ node\_modules/.pnpm/@types+node@20.11.10/node\_modules/@types/node/globals.d.ts:
 node\_modules/.pnpm/@types+node@20.11.6/node\_modules/@types/node/globals.d.ts:21
 >>>>>>> e8a4b758 (get it building again)
 
+=======
+>>>>>>> 4d99b9cd (:recycle: Regenerate)
 ***
 Generated using [typedoc-plugin-markdown](https://www.npmjs.com/package/typedoc-plugin-markdown) and [TypeDoc](https://typedoc.org/)

@@ -1,0 +1,1 @@
+{"version":3,"file":"CustomPrecompile.d.ts","sourceRoot":"","sources":["../src/CustomPrecompile.ts"],"names":[],"mappings":"AAAA;;;;;GAKG;AAEH,OAAO,KAAK,EAAE,mBAAmB,EAAE,MAAM,0BAA0B,CAAA;AAEnE;;GAEG;AACH,MAAM,MAAM,gBAAgB,GAAG,OAAO,CACrC,OAAO,CACN,mBAAmB,CAAC,cAAc,iBAAiB,EAAE,GAAG,CAAC,EACzD,SAAS,CACT,CAAC,mBAAmB,CAAC,EACtB,SAAS,CACT,CAAC,MAAM,CAAC,CAAA"}
