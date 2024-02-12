@@ -30,7 +30,7 @@ export const createJsonRpcFetcher = (
 				id: 1,
 			})
 			const res = await fetch(url, {
-				headers: /** @type any*/({
+				headers: /** @type any*/ ({
 					'content-type': 'application/json',
 					...headers,
 				}),
@@ -51,7 +51,7 @@ export const createJsonRpcFetcher = (
 							)()
 								.catch(async () => {
 									return res.json().then((resJson) => {
-										return JSON.stringify(/** @type any*/(resJson).error)
+										return JSON.stringify(/** @type any*/ (resJson).error)
 									})
 								})
 								.catch(() => {

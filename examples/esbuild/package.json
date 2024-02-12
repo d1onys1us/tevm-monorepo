@@ -15,7 +15,6 @@
 		"test:run": "bun test"
 	},
 	"dependencies": {
-		"viem": "^2.0.0",
 		"@tevm/contract": "workspace:^",
 		"viem": "^2.5.0",
 		"zod": "^3.22.4"
